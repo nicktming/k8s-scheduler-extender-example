@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"k8s.io/api/core/v1"
 	schedulerapi "k8s.io/kubernetes/pkg/scheduler/api"
 )
@@ -17,6 +18,7 @@ func (p Predicate) Handler(args schedulerapi.ExtenderArgs) *schedulerapi.Extende
 
 	for _, node := range args.Nodes.Items {
 		result, err := p.Func(*pod, node)
+		fmt.Printf("===>extender node:%v, result:%v\n", node.Name, result)
 		if err != nil {
 			canNotSchedule[node.Name] = err.Error()
 		} else {

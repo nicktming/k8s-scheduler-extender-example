@@ -31,6 +31,8 @@ func PredicateRoute(predicate Predicate) httprouter.Handle {
 		var extenderArgs schedulerapi.ExtenderArgs
 		var extenderFilterResult *schedulerapi.ExtenderFilterResult
 
+		// 解析从kube-scheduler发过来的请求并转化schedulerapi.ExtenderArgs对象 存到extenderArgs
+		// 返回extenderFilterResult
 		if err := json.NewDecoder(body).Decode(&extenderArgs); err != nil {
 			extenderFilterResult = &schedulerapi.ExtenderFilterResult{
 				Nodes:       nil,
