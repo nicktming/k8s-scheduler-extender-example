@@ -30,6 +30,9 @@ var (
 	TruePredicate = Predicate{
 		Name: "always_true",
 		Func: func(pod v1.Pod, node v1.Node) (bool, error) {
+			if node.Name == "172.21.0.16" {
+				return false, nil
+			}
 			return true, nil
 		},
 	}
