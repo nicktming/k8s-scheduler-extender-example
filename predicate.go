@@ -17,6 +17,7 @@ func (p Predicate) Handler(args schedulerapi.ExtenderArgs) *schedulerapi.Extende
 	canNotSchedule := make(map[string]string)
 
 	for _, node := range args.Nodes.Items {
+		// 调用自己的处理逻辑方法 判断该pod可不可以在该节点上运行
 		result, err := p.Func(*pod, node)
 		fmt.Printf("===>extender node:%v, result:%v\n", node.Name, result)
 		if err != nil {
